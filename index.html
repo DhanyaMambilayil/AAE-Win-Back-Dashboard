@@ -642,7 +642,7 @@ function renderAllTable() {
   const s = sortedBranches();
   document.getElementById('allTbody').innerHTML = s.map((b,i) => {
     const cls = sc(b.score);
-    const avpct = (b.avg * 100).toFixed(1);
+    const avpct = b.avg.toFixed(1);
     const badge = i < 3 ? BADGES[i]+' ' : '';
     const prize = i < 3 ? `<span style="color:var(--gold);font-size:0.75rem;font-weight:700"> ${PRIZES[i]}</span>` : '';
     const status = b.score>=2?'🟢 Excellent':b.score===1?'🔵 Good':b.score===0?'🟡 On Track':'🔴 Below Target';
@@ -651,7 +651,7 @@ function renderAllTable() {
       <td>${b.branch}</td>
       <td><span class="tag ${b.area.toLowerCase()}">${b.area}</span></td>
       <td class="score-cell ${cls}">${fmt(b.score)}</td>
-      <td>${b.avg>=1?'+':''} ${(b.avg*100).toFixed(1)}%</td>
+      <td>${b.avg>=100?'+':''}${avpct}%</td>
       <td style="font-size:0.8rem">${status}</td>
     </tr>`;
   }).join('');
